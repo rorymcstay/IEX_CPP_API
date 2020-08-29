@@ -11,6 +11,7 @@
 //TODO CHECK ALL SYMBOLS FOR VALID SYMBOL
 #include "IEX.h"
 
+
 void IEX::parseSymbolData(const Json::Value &IEXdata, std::vector<std::string> &symbolVec)
 {
     int i = 0;
@@ -54,10 +55,11 @@ std::size_t callback(const char* in, std::size_t size, std::size_t num, std::str
 }
 
 //Use LIBCURL to send the GET requests
-void IEX::sendGetRequest(Json::Value &jsonData, const std::string url)
+void IEX::sendGetRequest(Json::Value &jsonData, std::string& url)
 {
     CURL* curl = curl_easy_init();
     
+    url = url + std::string((url.find("?") == std::string::npos) ? "?token=" : "&token=") + std::string(TOKEN);
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     curl_easy_setopt(curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
     curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
@@ -125,7 +127,6 @@ Json::Value IEX::stocks::book(const std::string &symbol)
     std::string url(IEX_ENDPOINT);
     url+="/stock/"+symbol+"/book";
     IEX::sendGetRequest(jsonData, url);
-    assert(jsonData.isArray()); //Crash if not an array
     return jsonData;
 }
 

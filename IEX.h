@@ -11,10 +11,11 @@
 #include <algorithm>
 #include <boost/algorithm/string.hpp>
 
-#define IEX_ENDPOINT "https://api.iextrading.com/1.0"
-
+#define IEX_ENDPOINT "https://sandbox.iexapis.com/stable/"
+#define TOKEN "Tsk_d0f99a4337b74e729a5976f906a6e1f9"
+//#define TOKEN "sk_1df9441c7c9747298a78f09363cf5573"
 namespace IEX {
-    void sendGetRequest(Json::Value &data, const std::string url);
+    void sendGetRequest(Json::Value &data, std::string& url);
     bool isValidSymbol(const std::string &);
     std::vector<std::string> getSymbolList();
     void parseSymbolData(const Json::Value &, std::vector<std::string> &);
