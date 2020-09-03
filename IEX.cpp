@@ -14,7 +14,7 @@
 
 void IEX::parseSymbolData(const Json::Value &IEXdata, std::vector<std::string> &symbolVec)
 {
-    int i = 0;
+    unsigned int i = 0;
     
     //Step through JSON file until the end is reached
     while(i < IEXdata.size()) {
